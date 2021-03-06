@@ -204,12 +204,6 @@ var ascii85 = (function() {
 						throw new Exception("Broken EOD at position " + j);
 					}
 
-					if(tupleIndex)
-					{
-						tuple += POW_85_4[tupleIndex - 1];
-						pushPart();
-					}
-
 					stop = true;
 					break;
 				default:
@@ -226,6 +220,12 @@ var ascii85 = (function() {
 			}
 		}
 		while(i++ < text.length && !stop)
+		
+		if(tupleIndex)
+		{
+			tuple += POW_85_4[tupleIndex - 1];
+			pushPart();
+		}
 
 		return new Uint8Array(output);
 	}
